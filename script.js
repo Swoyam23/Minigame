@@ -18,11 +18,17 @@ bgMusic.volume = 0.5;
 let snitchSound = new Audio('sounds/snitch-catch.mp3');
 snitchSound.volume = 1.0;
 
-// Start game when the button is clicked
+// 🎵 Start game & Play music after user clicks button
 startBtn.addEventListener("click", () => {
-    startBtn.style.display = "none"; // Hide start button
+    startBtn.style.display = "none"; // Hide button
     gameActive = true;
-    bgMusic.play();
+    
+    // Play background music after user interaction
+    bgMusic.play().catch(error => {
+        console.log("Music play failed: ", error);
+    });
+
+    // Start creating Snitches
     setInterval(createSnitch, 1500);
 });
 

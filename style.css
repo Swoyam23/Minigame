@@ -1,144 +1,70 @@
-/* Import Harry Potter Font */
 @font-face {
-    font-family: 'HarryPotter';
-    src: url('harry_potter_font.ttf') format('truetype'); /* Ensure this file exists */
+    font-family: "HarryPotter";
+    src: url("harry_potter_font.ttf") format("truetype");
 }
 
 body {
-    font-family: 'HarryPotter', sans-serif;
-    background-image: url('hogwarts-bg.jpg'); /* Background image */
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    overflow: hidden;
+    font-family: "HarryPotter", sans-serif;
+    background: url("hogwarts-bg.jpg") no-repeat center center/cover;
     text-align: center;
+    overflow: hidden;
+    color: gold;
 }
 
-/* Game Container */
 #game-container {
+    position: relative;
     width: 100vw;
     height: 100vh;
-    position: relative;
-    overflow: hidden;
 }
 
-/* Objective Text */
 #objective {
+    font-size: 20px;
     position: absolute;
     top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 22px;
-    color: gold;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: 2px solid gold;
+    width: 100%;
 }
 
-/* Character (Harry) */
-#character {
+#start-btn {
+    font-size: 18px;
+    padding: 10px;
+    background: gold;
+    border: none;
+    cursor: pointer;
+}
+
+#score {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+#harry {
     width: 80px;
     height: 80px;
     position: absolute;
-    bottom: 10%;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
+    background: url("harry.png") no-repeat center/contain;
 }
 
-/* Snitch (Collectible) */
 .snitch {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     position: absolute;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s;
 }
 
-/* Snitch Collection Effect */
-.snitch.caught {
-    transform: scale(1.5) rotate(360deg);
+.caught {
+    transform: scale(1.5);
     opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
-/* Score Display */
-#score {
+#game-message {
+    font-size: 28px;
     position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 22px;
-    color: gold;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: 2px solid gold;
-}
-
-/* Game End Message */
-#message {
+    top: 50%;
+    width: 100%;
+    color: white;
     display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    text-align: center;
-    color: gold;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 25px;
-    border-radius: 10px;
-    border: 2px solid gold;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Fade-in Effect */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Start Button */
-#start-btn {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 12px 24px;
-    font-size: 20px;
-    background: gold;
-    color: black;
-    border: 2px solid black;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-    z-index: 10;
-}
-
-#start-btn:hover {
-    transform: translate(-50%, -50%) scale(1.1);
-}
-
-/* Mobile Fixes */
-@media (max-width: 768px) {
-    #character {
-        width: 70px;
-        height: 70px;
-    }
-    .snitch {
-        width: 45px;
-        height: 45px;
-    }
-    #score, #objective {
-        font-size: 18px;
-        padding: 8px 12px;
-    }
-    #message {
-        font-size: 20px;
-        padding: 20px;
-    }
-    #start-btn {
-        font-size: 18px;
-        padding: 10px 20px;
-    }
 }

@@ -8,6 +8,21 @@ body {
     background: url('images/hogwarts-bg.jpg') no-repeat center center/cover;
 }
 
+/* Start Button */
+#start-btn {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    font-size: 20px;
+    font-weight: bold;
+    color: gold;
+    background: black;
+    border: 2px solid gold;
+    cursor: pointer;
+}
+
 /* Game Container */
 #game-container {
     position: relative;
@@ -32,7 +47,7 @@ body {
 /* Golden Snitch */
 .heart {
     position: absolute;
-    width: 50px; /* Increased size */
+    width: 50px;
     height: 50px;
     background: url('images/snitch.png') no-repeat center/contain;
 }
@@ -75,19 +90,9 @@ body {
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Left button on left side */
-#left-btn {
-    left: 20px;
-}
+#left-btn { left: 20px; }
+#right-btn { right: 20px; }
 
-/* Right button on right side */
-#right-btn {
-    right: 20px;
-}
-
-/* Hide buttons on larger screens */
 @media (min-width: 768px) {
-    #left-btn, #right-btn {
-        display: none;
-    }
+    #left-btn, #right-btn { display: none; }
 }

@@ -32,7 +32,7 @@ body {
 /* Golden Snitch */
 .heart {
     position: absolute;
-    width: 50px;  /* Increased size */
+    width: 50px; /* Increased size */
     height: 50px;
     background: url('images/snitch.png') no-repeat center/contain;
 }
@@ -64,7 +64,7 @@ body {
 
 /* Mobile Buttons */
 #left-btn, #right-btn {
-    position: fixed;  /* Keep buttons fixed at bottom */
+    position: fixed;  
     bottom: 20px;
     width: 60px;
     height: 60px;

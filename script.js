@@ -1,81 +1,84 @@
-@import url('https://fonts.cdnfonts.com/css/harry-potter');
+const player = document.getElementById('player');
+const gameContainer = document.getElementById('game-container');
+const message = document.getElementById('message');
+const leftBtn = document.getElementById('left-btn');
+const rightBtn = document.getElementById('right-btn');
 
-body {
-    text-align: center;
-    background-image: url('background.jpg'); /* Add a magical HP background */
-    background-size: cover;
-    background-position: center;
-    font-family: 'Harry Potter', sans-serif;
-    color: #ffd700;
+let playerPosition = 160;
+let heartsCaught = 0;
+let gameActive = true;
+let gameInterval;
+
+// Move player with touch controls
+leftBtn.addEventListener('click', () => movePlayer('left'));
+rightBtn.addEventListener('click', () => movePlayer('right'));
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') movePlayer('left');
+    if (event.key === 'ArrowRight') movePlayer('right');
+});
+
+function movePlayer(direction) {
+    if (!gameActive) return;
+    
+    if (direction === 'left' && playerPosition > 0) {
+        playerPosition -= 20;
+    } else if (direction === 'right' && playerPosition < 320) {
+        playerPosition += 20;
+    }
+    player.style.left = playerPosition + 'px';
 }
 
-h1 {
-    font-size: 30px;
-    text-shadow: 3px 3px 5px black;
+// Function to create falling Snitches
+function createHeart() {
+    if (!gameActive) return;
+
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 350 + 'px';
+    heart.style.top = '0px';
+    gameContainer.appendChild(heart);
+
+    let fallInterval = setInterval(() => {
+        if (!gameActive) {
+            clearInterval(fallInterval);
+            return;
+        }
+
+        let heartTop = parseInt(heart.style.top);
+        if (heartTop < 480) {
+            heart.style.top = (heartTop + 5) + 'px';
+        } else {
+            clearInterval(fallInterval);
+            gameContainer.removeChild(heart);
+        }
+
+        // Collision detection
+        let heartLeft = parseInt(heart.style.left);
+        let playerLeft = parseInt(player.style.left);
+        if (heartTop > 440 && Math.abs(heartLeft - playerLeft) < 60) { 
+            heartsCaught++;
+            gameContainer.removeChild(heart);
+            clearInterval(fallInterval);
+            updateMessage();
+        }
+    }, 50);
 }
 
-#game-container {
-    width: 400px;
-    height: 500px;
-    border: 2px solid #ffd700;
-    margin: auto;
-    position: relative;
-    background: rgba(0, 0, 0, 0.8);
-    overflow: hidden;
+// Update message and stop the game
+function updateMessage() {
+    if (heartsCaught >= 10) {
+        gameActive = false;
+        clearInterval(gameInterval);
+
+        document.querySelectorAll('.heart').forEach(heart => heart.remove());
+
+        message.innerHTML = "You've caught all the Snitches! I hope you can forgive me ❤";
+        message.style.display = 'block';
+    }
 }
 
-#player {
-    width: 80px;  /* Increased size */
-    height: 80px;
-    background-image: url('harry-potter.png'); /* Harry Potter character */
-    background-size: cover;
-    position: absolute;
-    bottom: 10px;
-    left: 160px;
-}
-
-.heart {
-    width: 60px;  /* Larger size */
-    height: 60px;
-    background-image: url('snitch.png'); /* Golden Snitch */
-    background-size: cover;
-    position: absolute;
-}
-
-#message {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 28px;
-    font-weight: bold;
-    color: #ffcc00;
-    background: rgba(0, 0, 0, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    text-shadow: 2px 2px 5px black;
-}
-
-#controls {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-#controls button {
-    width: 70px;
-    height: 70px;
-    font-size: 28px;
-    margin: 5px;
-    border: none;
-    background-color: #6a1b9a;
-    color: white;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-#controls button:active {
-    background-color: #4a148c;
-}
+// Start game when page loads
+window.onload = () => {
+    gameInterval = setInterval(createHeart, 1000);
+};

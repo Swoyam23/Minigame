@@ -107,3 +107,16 @@ if (score >= 10) {
     message.style.display = "block"; // Ensure message is visible
     bgMusic.pause();
 }
+
+function startGame() {
+    gameActive = true;
+    score = 0;
+    document.getElementById("start-btn").style.display = "none"; // Hide start button
+    document.getElementById("message").style.display = "none"; // Hide end message
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("start-btn").addEventListener("click", function() {
+        startGame();
+    });
+});

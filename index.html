@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harry Potter </title>
+    <title>Harry Potter Snitch Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <button id="start-btn">Click to Start</button>
-    
-    <div id="game-objective">
-    Catch 10 Golden Snitches to get a special message!! ⚡
-
     <div id="game-container">
-        <div id="player"></div>
+        <h2 id="objective">Catch 10 Snitches to Win!</h2>
+        <p id="score">Score: 0</p>
+        <img id="character" src="harry.png" alt="Harry Potter">
+        <button id="start-btn">Click to Start</button>
         <div id="message"></div>
     </div>
-
-    <button id="left-btn">⬅</button>
-    <button id="right-btn">➡</button>
 
     <script src="script.js"></script>
 </body>

@@ -8,11 +8,14 @@ const scoreDisplay = document.getElementById("score");
 const gameMessage = document.getElementById("game-message");
 const startButton = document.getElementById("start-btn");
 
+// ✅ FIX: Ensure event listener is added after the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    startButton.addEventListener("click", startGame);
+});
+
 document.addEventListener("click", () => {
     bgMusic.play().catch(err => console.log("Music play error:", err));
 });
-
-startButton.addEventListener("click", startGame);
 
 function startGame() {
     gameActive = true;

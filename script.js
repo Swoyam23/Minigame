@@ -104,6 +104,6 @@ function collectSnitch(snitch) {
 function endGame() {
     gameActive = false;
     message.style.display = "block";
-    message.innerHTML = "You caught 10 Snitches! <br> soooryyy!! <br> aur kar raha hun try manane ki";
+    message.innerHTML = "you proved you magic! I hope you forgive me. <br><br>lets fly to Hogwarts together!":
     bgMusic.pause();
 }

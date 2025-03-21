@@ -13,14 +13,16 @@ let gameInterval;
 leftBtn.addEventListener('click', () => movePlayer('left'));
 rightBtn.addEventListener('click', () => movePlayer('right'));
 
+// Move player with keyboard
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft') movePlayer('left');
     if (event.key === 'ArrowRight') movePlayer('right');
 });
 
+// Function to move player
 function movePlayer(direction) {
     if (!gameActive) return;
-    
+
     if (direction === 'left' && playerPosition > 0) {
         playerPosition -= 20;
     } else if (direction === 'right' && playerPosition < 320) {
@@ -58,14 +60,24 @@ function createHeart() {
         let playerLeft = parseInt(player.style.left);
         if (heartTop > 440 && Math.abs(heartLeft - playerLeft) < 60) { 
             heartsCaught++;
-            gameContainer.removeChild(heart);
+
+            // Apply catch effect
+            heart.classList.add('caught');
+
+            // Wait for animation to finish before removing
+            setTimeout(() => {
+                if (gameContainer.contains(heart)) {
+                    gameContainer.removeChild(heart);
+                }
+            }, 300);
+
             clearInterval(fallInterval);
             updateMessage();
         }
     }, 50);
 }
 
-// Update message and stop the game
+// Function to update message and stop the game
 function updateMessage() {
     if (heartsCaught >= 10) {
         gameActive = false;
@@ -73,14 +85,17 @@ function updateMessage() {
 
         document.querySelectorAll('.heart').forEach(heart => heart.remove());
 
-        message.innerHTML = "I hope you can forgive me, sending a virtual hug ❤";
-        let extraMessage =
-document.createElement('p');
-        extraMessage.innerHTML = "utna hi naraz ho koshish kar raha manane ki";
+        // Show the first message
+        message.innerHTML = "You've caught all the Snitches! I hope you can forgive me ❤";
+
+        // Create a new message below
+        let extraMessage = document.createElement('p');
+        extraMessage.innerHTML = "You're my magic, my Hermione in this Hogwarts of life. 🪄💖";
         extraMessage.style.marginTop = "10px";
         extraMessage.style.fontSize = "20px";
-        extraMessage.style.fontFamily = "'HarryPottter', sans-serif";
-        extraMessage.style.color = "#FFD700"
+        extraMessage.style.fontFamily = "'IM Fell English SC', serif";
+        extraMessage.style.color = "#FFD700";  // Golden text for the theme
+
         message.appendChild(extraMessage);
         message.style.display = 'block';
     }

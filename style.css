@@ -95,3 +95,16 @@ body {
 @media (min-width: 768px) {
     #left-btn, #right-btn { display: none; }
 }
+#game-objective {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: gold;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid gold;
+}

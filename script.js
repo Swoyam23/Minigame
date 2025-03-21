@@ -105,5 +105,6 @@ function endGame() {
     gameActive = false;
     message.style.display = "block";
     message.innerHTML = "You caught 10 Snitches! <br> You truly are the Chosen One!";
+    message.innerHTML = "soooryyy aur kar raha hun try manane ki";
     bgMusic.pause();
 }

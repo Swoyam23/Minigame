@@ -73,7 +73,15 @@ function updateMessage() {
 
         document.querySelectorAll('.heart').forEach(heart => heart.remove());
 
-        message.innerHTML = "You've caught all the Snitches! I hope you can forgive me ❤";
+        message.innerHTML = "I hope you can forgive me, sending a virtual hug ❤";
+        let extraMessage =
+document.createElement('p');
+        extraMessage.innerHTML = "utna hi naraz ho koshish kar raha manane ki";
+        extraMessage.style.marginTop = "10px";
+        extraMessage.style.fontSize = "20px";
+        extraMessage.style.fontFamily = "'HarryPottter', sans-serif";
+        extraMessage.style.color = "#FFD700"
+        message.appendChild(extraMessage);
         message.style.display = 'block';
     }
 }

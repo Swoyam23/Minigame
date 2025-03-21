@@ -104,7 +104,6 @@ function collectSnitch(snitch) {
 function endGame() {
     gameActive = false;
     message.style.display = "block";
-    message.innerHTML = "You caught 10 Snitches! <br> You truly are the Chosen One!";
-    message.innerHTML = "soooryyy aur kar raha hun try manane ki";
+    message.innerHTML = "You caught 10 Snitches! <br> soooryyy!! <br> aur kar raha hun try manane ki";
     bgMusic.pause();
 }

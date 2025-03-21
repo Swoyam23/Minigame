@@ -11,6 +11,7 @@ const scoreDisplay = document.getElementById("score");
 
 // Background music
 const bgMusic = new Audio("music.mp3");
+const catchSound = new Audio("catch.mp3"); // Load Snitch catching sound   
 bgMusic.loop = true;
 
 // Play music only after user interaction
@@ -52,6 +53,9 @@ function spawnSnitch() {
             checkGameEnd();
         }
     });
+
+    catchSound.play(); // Play Snitch catching sound
+}
 
     setTimeout(spawnSnitch, 1000);
 }

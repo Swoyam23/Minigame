@@ -53,7 +53,7 @@ h1 {
     100% { transform: scale(2); opacity: 0; }
 }
 .caught {
-    animation: catchEffect 0.5s ease-out;
+    animation: catchEffect 1s ease-out;
 }
 
 

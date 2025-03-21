@@ -88,6 +88,13 @@ function createSnitch() {
     }, 50);
 }
 
+function startGame() {
+    gameActive = true;
+    score = 0;
+    document.getElementById("start-btn").style.display = "none"; // Hide start button
+    document.getElementById("message").style.display = "none"; // Hide end message
+}
+
 // Snitch collected animation
 function collectSnitch(snitch) {
     snitch.classList.add("caught");
@@ -101,22 +108,9 @@ function collectSnitch(snitch) {
 }
 
 // End game after collecting 10 Snitches
-if (score >= 10) {
+function endGame() {
     gameActive = false;
+    message.style.display = "block";
     message.innerHTML = "You proved your magic! I hope you forgive me. ⚡<br><br>Let's fly to Hogwarts together!";
-    message.style.display = "block"; // Ensure message is visible
     bgMusic.pause();
 }
-
-function startGame() {
-    gameActive = true;
-    score = 0;
-    document.getElementById("start-btn").style.display = "none"; // Hide start button
-    document.getElementById("message").style.display = "none"; // Hide end message
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("start-btn").addEventListener("click", function() {
-        startGame();
-    });
-});

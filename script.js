@@ -100,6 +100,12 @@ function collectSnitch(snitch) {
     }
 }
 
+if (score >= 10) {
+    gameActive = false;
+    message.innerHTML = "You proved your magic! I hope you forgive me. ⚡<br><br>Let's fly to Hogwarts together!";
+    message.style.display = "block"; // Ensure message is visible
+}
+
 // End game after collecting 10 Snitches
 function endGame() {
     gameActive = false;

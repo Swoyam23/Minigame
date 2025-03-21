@@ -23,14 +23,13 @@ body {
     cursor: pointer;
 }
 
-/* Game Container */
 #game-container {
     position: relative;
     width: 400px;
     height: 500px;
     margin: 50px auto;
     border: 2px solid gold;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7); /* Make it slightly transparent */
     overflow: hidden;
 }
 

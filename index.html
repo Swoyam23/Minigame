@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catch the Snitch - Harry Potter Game</title>
+    <title>Harry Potter Snitch Game</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="harry_potter_font.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 </head>
 <body>
+    <h1>Catch the Snitch!</h1>
+    <p>Move Harry left/right and catch 10 Snitches to win!</p>
+    
     <div id="game-container">
-        <h1 id="objective">Catch 10 Golden Snitches to win!</h1>
-        <button id="start-btn">Click to Start</button>
-        <div id="score">Snitches Caught: 0</div>
-        <div id="harry"></div>
+        <div id="game-field">
+            <img id="harry" src="harry.png">
+        </div>
     </div>
+
+    <p id="score">Snitches Caught: 0</p>
+    <button id="start-btn">Click to Start</button>
     <p id="game-message"></p>
+
     <script src="script.js"></script>
 </body>
 </html>

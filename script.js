@@ -1,97 +1,103 @@
-const bgMusic = new Audio("music.mp3");
-const catchSound = new Audio("catch.mp3");
+// Select elements
+const gameContainer = document.getElementById('game-container');
+const player = document.getElementById('player');
+const message = document.getElementById('message');
+const leftBtn = document.getElementById('left-btn');
+const rightBtn = document.getElementById('right-btn');
+const startBtn = document.getElementById('start-btn');
 
-let score = 0;
 let gameActive = false;
-const gameContainer = document.getElementById("game-container");
-const scoreDisplay = document.getElementById("score");
-const gameMessage = document.getElementById("game-message");
-const startButton = document.getElementById("start-btn");
-const harry = document.getElementById("harry");
+let score = 0;
 
-let harryX = 50;
+// Load background music
+let bgMusic = new Audio('sounds/music.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.5;
 
-window.onload = function () {
-    let startButton = document.getElementById("start-btn");
-    startButton.style.display = "block"; // ✅ Ensure button appears
-    startButton.addEventListener("click", startGame);
-};
+// Load Snitch catch sound effect
+let snitchSound = new Audio('sounds/snitch-catch.mp3');
+snitchSound.volume = 1.0;
 
-// ✅ Ensure Music Plays on Interaction
-document.addEventListener("click", () => {
-    bgMusic.play().catch(err => console.log("Music error:", err));
+// Start game when the button is clicked
+startBtn.addEventListener("click", () => {
+    startBtn.style.display = "none"; // Hide start button
+    gameActive = true;
+    bgMusic.play();
+    setInterval(createSnitch, 1500);
 });
 
-// ✅ Fix Character Movement
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft" && harryX > 10) {
-        harryX -= 5;
-    } else if (e.key === "ArrowRight" && harryX < 90) {
-        harryX += 5;
+// Move player (Harry Potter)
+function movePlayer(direction) {
+    let left = parseInt(window.getComputedStyle(player).getPropertyValue('left'));
+
+    if (direction === 'left' && left > 20) {
+        player.style.left = (left - 30) + 'px';
     }
-    harry.style.left = harryX + "%";
+    if (direction === 'right' && left < 320) {
+        player.style.left = (left + 30) + 'px';
+    }
+}
+
+// Keyboard Controls (Arrow Keys + WASD)
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft" || event.key === "a") movePlayer("left");
+    if (event.key === "ArrowRight" || event.key === "d") movePlayer("right");
 });
 
-// ✅ Fix Snitch Falling and Limited Area
-function spawnSnitch() {
+// Mobile Controls
+leftBtn.addEventListener("touchstart", () => movePlayer("left"));
+rightBtn.addEventListener("touchstart", () => movePlayer("right"));
+
+// Create Snitches (Golden Snitch falling)
+function createSnitch() {
     if (!gameActive) return;
 
-    let snitch = document.createElement("img");
-    snitch.src = "snitch.png";
-    snitch.classList.add("snitch");
-
-    let startX = Math.random() * 80 + 10; // Keep Snitch in field
-    let startY = 0;
-
-    snitch.style.left = startX + "%";
-    snitch.style.top = startY + "%";
+    let snitch = document.createElement("div");
+    snitch.classList.add("heart");
+    snitch.style.left = Math.random() * 350 + "px"; 
+    snitch.style.top = "0px";
     gameContainer.appendChild(snitch);
 
     let fallInterval = setInterval(() => {
-        startY += 2;
-        snitch.style.top = startY + "%";
-
-        // Remove Snitch if it reaches the ground
-        if (startY >= 90) {
+        if (!gameActive) {
             clearInterval(fallInterval);
-            snitch.remove();
+            return;
+        }
+
+        let snitchTop = parseInt(snitch.style.top);
+        let playerLeft = parseInt(player.style.left);
+
+        if (snitchTop < 480) {
+            snitch.style.top = (snitchTop + 7) + "px";  
+        } else {
+            clearInterval(fallInterval);
+            gameContainer.removeChild(snitch);
+        }
+
+        // Collision detection
+        if (snitchTop > 420 && Math.abs(playerLeft - parseInt(snitch.style.left)) < 40) {
+            collectSnitch(snitch);
+            clearInterval(fallInterval);
         }
     }, 50);
-
-    // ✅ Catching Snitch
-    snitch.addEventListener("click", function () {
-        if (gameActive) {
-            score++;
-            scoreDisplay.innerText = "Snitches Caught: " + score;
-            snitch.classList.add("caught");
-            catchSound.currentTime = 0;
-            catchSound.play();
-            setTimeout(() => {
-                clearInterval(fallInterval);
-                snitch.remove();
-            }, 300);
-            checkGameEnd();
-        }
-    });
-
-    setTimeout(spawnSnitch, 1000);
 }
 
-// ✅ Fix Game End
-function checkGameEnd() {
-    if (score >= 10) {
-        gameActive = false;
-        gameMessage.innerText = "Congratulations! You caught 10 Snitches!";
-        gameMessage.style.display = "block";
-        startButton.style.display = "block";
+// Snitch collected animation
+function collectSnitch(snitch) {
+    snitch.classList.add("caught");
+    snitchSound.play();
+    setTimeout(() => gameContainer.removeChild(snitch), 150);
+    
+    score++;
+    if (score === 10) {
+        endGame();
     }
 }
 
-function startGame() {
-    gameActive = true;
-    score = 0;
-    scoreDisplay.innerText = "Snitches Caught: 0";
-    gameMessage.style.display = "none";
-    startButton.style.display = "none";
-    spawnSnitch();
+// End game after collecting 10 Snitches
+function endGame() {
+    gameActive = false;
+    message.style.display = "block";
+    message.innerHTML = "You caught 10 Snitches! <br> You truly are the Chosen One!";
+    bgMusic.pause();
 }

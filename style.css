@@ -37,7 +37,7 @@ h1 {
 #harry {
     position: absolute;
     width: 80px;
-    bottom: 10px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
 }

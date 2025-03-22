@@ -21,7 +21,9 @@ h1 {
 #game-container {
     position: relative;
     width: 100vw;
-    height: 80vh;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
 }
 
 #game-field {

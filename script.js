@@ -11,9 +11,10 @@ const harry = document.getElementById("harry");
 
 let harryX = 50;
 
-// ✅ Fix Start Button Issue
 window.onload = function () {
-    document.getElementById("start-btn").addEventListener("click", startGame);
+    let startButton = document.getElementById("start-btn");
+    startButton.style.display = "block"; // ✅ Ensure button appears
+    startButton.addEventListener("click", startGame);
 };
 
 // ✅ Ensure Music Plays on Interaction

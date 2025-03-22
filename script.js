@@ -91,6 +91,6 @@ function startGame() {
     score = 0;
     scoreDisplay.innerText = "Snitches Caught: 0";
     gameMessage.style.display = "none";
-    startButton.style.display = "none";
+    startButton.style.display = "block";
     spawnSnitch();
 }

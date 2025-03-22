@@ -39,15 +39,24 @@ h1 {
 #harry {
     position: absolute;
     width: 80px;
-    bottom: 50px;
+    bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+#snitch {
+    width: 5vw; /* Snitch scales dynamically */
+    position: absolute;
+    top: 0; /* Starts from top */
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fall 3s linear infinite;
 }
 
 .snitch {
     position: absolute;
     width: 40px;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 1s ease-in-out;
 }
 
 .snitch.caught {

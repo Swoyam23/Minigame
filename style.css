@@ -1,59 +1,98 @@
-/* Ensure game fits the screen */
-#game-container {
-    width: 100vw;
-    height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
+
+body {
+    margin: 0;
     overflow: hidden;
-    position: relative;
-    background-size: cover;
-    background-position: center;
+    text-align: center;
+    font-family: 'IM Fell English SC', serif;
+    background: url('images/hogwarts-bg.jpg') no-repeat center center/cover;
 }
 
-/* Fix character position */
-#harry {
-    position: absolute;
-    width: 10vw;
-    max-width: 80px;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Limit snitch falling area */
-#snitch {
-    width: 5vw;
-    max-width: 50px;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: fall 3s linear infinite;
-}
-
-/* Fix start button position */
+/* Start Button */
 #start-btn {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    font-size: 20px;
+    font-weight: bold;
+    color: gold;
+    background: black;
+    border: 2px solid gold;
+    cursor: pointer;
+}
+
+/* Game Container */
+#game-container {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    margin: 50px auto;
+    border: 2px solid gold;
+    background: rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+/* Player (Harry Potter) */
+#player {
+    position: absolute;
+    bottom: 20px;
+    left: 160px;
+    width: 60px;
+    height: 60px;
+    background: url('images/harry.png') no-repeat center/contain;
+}
+
+/* Golden Snitch */
+.heart {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url('images/snitch.png') no-repeat center/contain;
+}
+
+/* Catch Effect Animation */
+@keyframes catchEffect {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+.caught {
+    animation: catchEffect 0.15s ease-out;
+}
+
+/* Message Styling */
+#message {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 10px 20px;
-    font-size: 18px;
-    z-index: 1000;
+    font-size: 22px;
+    color: gold;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid gold;
 }
 
-/* Responsive adjustments for mobile */
-@media (max-width: 600px) {
-    #harry {
-        width: 15vw;
-        max-width: 70px;
-    }
-    
-    #snitch {
-        width: 7vw;
-        max-width: 40px;
-    }
-    
-    #start-btn {
-        font-size: 16px;
-        padding: 8px 16px;
-    }
+/* Mobile Buttons */
+#left-btn, #right-btn {
+    position: fixed;  
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    background: gold;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#left-btn { left: 20px; }
+#right-btn { right: 20px; }
+
+@media (min-width: 768px) {
+    #left-btn, #right-btn { display: none; }
 }
